@@ -39,16 +39,17 @@ array1.forEach(element => console.log(element));
 
 /* read the data from the database */
 
-/*
 firebase
   .firestore()
-  .collection('hoteldata')
+  .collection('hotelcollections')
   .onSnapshot((querySnapshot) => {
     console.log(querySnapshot.size);
     querySnapshot.forEach((doc) => {
       console.log(doc.data());
       console.log(doc.data().room);
       console.log(doc.data().checkout);
+      console.log(doc.data().checkin);
+      console.log(doc.data().name);
+      console.log(doc.data().num);
     });
   });
-*/
