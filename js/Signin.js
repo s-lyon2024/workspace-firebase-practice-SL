@@ -16,8 +16,8 @@ $('#Login').submit(function (e) {
   e.preventDefault();
   // get the user name and password from form
   // You need to change this.
-  var email = 'yilianz4@gmail.com';
-  var password = 'ddsgagafda';
+  var email = 'lyons@gmail.com';
+  var password = '12345bobbie';
 
   firebase
     .auth()
@@ -38,10 +38,8 @@ $('#Login').submit(function (e) {
       }
     })
     .catch((error) => {
-
       var errorCode = error.code;
       var errorMessage = error.message;
       console.log(errorMessage);
     });
 });
-
