@@ -1,4 +1,4 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+//import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 const firebaseConfig = {
   apiKey: 'AIzaSyC9IFN_gsJbH-vsNw2bghWq5Shp3zMO3y8',
   authDomain: 'grocies-700b7.firebaseapp.com',
@@ -42,9 +42,9 @@ $('#Login').submit(function (e) {
       console.log(errorMessage);
     });
 
-  $('#signGoogle').click(function () {
+  $('#signGoogle').click(function() {
     const provider = new firebase.auth.GoogleAuthProvider();
-
+    console.log('Google');
     //const auth = getAuth();
     firebase
       .auth()
