@@ -1,12 +1,12 @@
-var firebaseConfig = {
-  apiKey: 'AIzaSyAzcwgZuLA7dO9g4sQhXQVTUgCo0M8m2qM',
-  authDomain: 'grocerylist-91956.firebaseapp.com',
-  databaseURL: 'https://grocerylist-91956.firebaseio.com',
-  projectId: 'grocerylist-91956',
-  storageBucket: 'grocerylist-91956.appspot.com',
-  messagingSenderId: '813812426276',
-  appId: '1:813812426276:web:93e5897af12892ff78dab1',
-  measurementId: 'G-VZ83BTR72T',
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+const firebaseConfig = {
+  apiKey: 'AIzaSyC9IFN_gsJbH-vsNw2bghWq5Shp3zMO3y8',
+  authDomain: 'grocies-700b7.firebaseapp.com',
+  projectId: 'grocies-700b7',
+  storageBucket: 'grocies-700b7.appspot.com',
+  messagingSenderId: '616117787461',
+  appId: '1:616117787461:web:8ec17f04f27cfe51fbfc2c',
+  measurementId: 'G-KVEGFW5T0Q',
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -16,18 +16,17 @@ $('#Login').submit(function (e) {
   e.preventDefault();
   // get the user name and password from form
   // You need to change this.
-  var email = 'lyons@gmail.com';
-  var password = '12345bobbie';
-
+  var email = $('#login').val();
+  var password = $('#pwd').val();
+  console.log('email: ' + email + ' password: ' + password);
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then((success) => {
       // Signed in
-      // ...
       console.log('login in');
       let user = firebase.auth().currentUser;
-
+      window.location.href = 'index.html';
       //user.updateProfile({ displayName: "Not sure" });
       if (user != null) {
         name = user.displayName;
@@ -42,4 +41,32 @@ $('#Login').submit(function (e) {
       var errorMessage = error.message;
       console.log(errorMessage);
     });
+
+  $('#signGoogle').click(function () {
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    //const auth = getAuth();
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const user = result.user;
+        console.log('Google user' + credential.email + 'Log in');
+        //  const token = credential.accessToken;
+        // The signed-in user info.
+        //  const user = result.user;
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  });
 });
