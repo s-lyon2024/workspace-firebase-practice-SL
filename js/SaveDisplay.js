@@ -1,5 +1,6 @@
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
 const firebaseConfig = {
   apiKey: 'AIzaSyC9IFN_gsJbH-vsNw2bghWq5Shp3zMO3y8',
   authDomain: 'grocies-700b7.firebaseapp.com',
@@ -12,6 +13,29 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    console.log('We have a user logged in ' + user.email);
+  } else {
+    console.log('The user did not log in');
+    window.location.href = 'index.html';
+  }
+});
+
+$('#signout').click(function () {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      // Sign-out successful
+      window.location.href = 'index.html';
+    })
+    .catch((error) => {
+      // An error happened
+      console.log(error.message);
+    });
+});
 
 // save the data
 $(".sampleSurvey input[type='submit']").click(function (e) {
